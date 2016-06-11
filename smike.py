@@ -28,11 +28,12 @@ def UpdateFrequency(channel):
        
 
 def UpdateSong(SongId):
-    global player
+    global player, LastSongStart
     Song = (SongDict[SongId]["Title"]+'.mp3')
     player.quit()
     player = OMXPlayer('/home/pi/Music/' + Song)
     player.play()
+    LastSongStart = time.time()
 
 def QuitPlay():
     player.quit()
