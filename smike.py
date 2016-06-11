@@ -111,10 +111,11 @@ try:
                 if CurrentVolume == -3333:
                     SongUpdated = True
             else:
-                Song = (SongDict[CurrentSong]["Title"]+'.mp3')
-                player.quit()
-                player = OMXPlayer('/home/pi/Music/' + Song)
-                player.play()
+                if CurrentVolume == -3333:
+                    Song = (SongDict[CurrentSong]["Title"]+'.mp3')
+                    player.quit()
+                    player = OMXPlayer('/home/pi/Music/' + Song)
+                    player.play()
             
                 CurrentVolume = min(Volume, CurrentVolume + 100*BlendSpeed)
                 
