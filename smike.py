@@ -49,8 +49,8 @@ GPIO.setup(ReedBreakPin, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(LEDPin, GPIO.OUT)
 
 GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
-GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBreakRising)
-GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBreakFalling)
+GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBrakeRising)
+GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBrakeFalling)
 
 ##Frequency
 PeriodTime = 0
