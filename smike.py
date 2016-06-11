@@ -58,52 +58,54 @@ for row in reader:
                 SongDict[int(row[0])][Header[index]] = row[index]
 print(SongDict)
 
+
 Song = (SongDict[1]["Title"]+'.mp3')
 player = OMXPlayer('/home/pi/Music/' + Song)
-
-UpdateSong(1)
-
-player.play()
-
-##Tick
-while True:
-    ##Frequqncy Interpolation
-    Frequency += (ActualFrequency-Frequency)*0.1
-    Frequency = min(Frequency, 200)
-    #print(Frequency)
-    #print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
-
-    ## Reed Sensor Check
+try:
+    UpdateSong(1)
     
+    player.play()
     
-    if GPIO.input(ReedPin) and time.time() - Time > Bias:
-        
-
-        ##Frequency Check
-        Tmp = time.time()
-        PeriodTime = Tmp - Time
-        Time = Tmp
-        ActualFrequency = 1/PeriodTime*60*2
-        #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
-        print(Frequency)
-        ##Song Update
-        if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
-            pass
-        else:
-            CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
-            if CurrentDelta > 0 and CurrentSong < len(SongDict):
-                NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
-                if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
-                    CurrentSong += 1
-                    print("CRASHPOINT")
-                    UpdateSong(CurrentSong)
-
-            elif CurrentDelta < 0 and CurrentSong != 1:
-                NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
-                if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
-                    CurrentSong -= 1
-                    UpdateSong(CurrentSong)
-
+    ##Tick
+    while True:
+        ##Frequqncy Interpolation
+        Frequency += (ActualFrequency-Frequency)*0.1
+        Frequency = min(Frequency, 200)
+        #print(Frequency)
+        #print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
     
+        ## Reed Sensor Check
         
         
+        if GPIO.input(ReedPin) and time.time() - Time > Bias:
+            
+    
+            ##Frequency Check
+            Tmp = time.time()
+            PeriodTime = Tmp - Time
+            Time = Tmp
+            ActualFrequency = 1/PeriodTime*60*2
+            #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
+            print(int(Frequency), PeriodTime)
+            ##Song Update
+            if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
+                pass
+            else:
+                CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
+                if CurrentDelta > 0 and CurrentSong < len(SongDict):
+                    NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
+                    if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
+                        CurrentSong += 1
+                        print("CRASHPOINT")
+                        UpdateSong(CurrentSong)
+    
+                elif CurrentDelta < 0 and CurrentSong != 1:
+                    NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
+                    if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                        CurrentSong -= 1
+                        UpdateSong(CurrentSong)
+except:
+    pass
+        
+            
+            
