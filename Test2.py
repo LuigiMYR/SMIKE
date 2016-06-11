@@ -3,7 +3,7 @@
 
 import time
 import RPi.GPIO as GPIO
-reed = 4
+reed = 17
 def savetime(channel):
     print("Funktioniert")
 
