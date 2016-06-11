@@ -169,8 +169,5 @@ except KeyboardInterrupt:
     player.quit()
     logfile.close()
     GPIO.output(LEDPin,GPIO.LOW)
-except:
-    player.quit()
-    logfile.close()
-    GPIO.output(LEDPin,GPIO.LOW)
+
             
