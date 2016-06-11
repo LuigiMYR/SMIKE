@@ -93,7 +93,7 @@ try:
         Frequency += (ActualFrequency-Frequency)*0.025
         Frequency = min(Frequency, 400)
         
-        print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**2)
+        print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.1)
         ##Song Update
         if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
             pass
