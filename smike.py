@@ -136,7 +136,6 @@ try:
                     Song = (SongDict[CurrentSong]["Title"]+'.mp3')
                     player.quit()
                     player = OMXPlayer('/home/pi/Music/' + Song)
-                    player.set_position(45)
                     player.play()
                     
             
