@@ -56,7 +56,7 @@ MinSongTime = 10
 MinSongTimeRatio = 20
 PushFactor = 1.05
 Bias = 0.2
-BlendingSpeed = 1
+BlendSpeed = 1
 CurrentVolume = 0
 Volume = -1000
 
