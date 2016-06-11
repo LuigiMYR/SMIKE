@@ -42,13 +42,15 @@ def OnBrakeFalling(channel):
 
 ReedBeatPin = 4
 ReedBreakPin = 17
+LEDPin = 27
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 GPIO.setup(ReedBeatPin, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(ReedBreakPin, GPIO.IN, GPIO.PUD_DOWN)
-
+GPIO.setup(LEDPin, GPIO.OUT)
+#fürs anmachen GPIO.output(LEDPin, GPIO.HIGH)  für ausmachen GPIO.output(LEDPin, GPIO.LOW)
 GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
 GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBreakRising)
 GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBreakFalling)
