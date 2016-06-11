@@ -84,7 +84,8 @@ while True:
         PeriodTime = Tmp - Time
         Time = Tmp
         ActualFrequency = 1/PeriodTime*60*2
-        print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
+        #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
+        print(Frequency)
         ##Song Update
         if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
             pass
