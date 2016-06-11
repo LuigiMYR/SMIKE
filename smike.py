@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 
 GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
-GPIO.add_event_detect(ReedPin, GPIO.RISING, callback=UpdateFrequency)
+
 
 SongDict = collections.OrderedDict()
 
@@ -54,6 +54,8 @@ def UpdateSong(SongId):
 def QuitPlay():
     player.quit()
 
+
+GPIO.add_event_detect(ReedPin, GPIO.RISING, callback=UpdateFrequency)
 
 ##Frequency
 PeriodTime = 0
