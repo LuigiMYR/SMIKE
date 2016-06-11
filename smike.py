@@ -34,6 +34,7 @@ def UpdateSong(SongId):
     #player = OMXPlayer('/home/pi/Music/' + Song)
     #player.play()
     #LastSongStart = time.time()
+    global Fading
     Fading = True
     
 def QuitPlay():
