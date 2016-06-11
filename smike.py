@@ -140,7 +140,7 @@ try:
                 if CurrentDelta > 0:
                     NewSong = CurrentSong
                     print("hh")
-                    while NewSong < len(SongDict) and abs(Frequency - SongDict[NewSong+1]["BPM"]) <= abs(NewSong)*PushFactor:
+                    while NewSong < len(SongDict) and abs(Frequency - SongDict[NewSong+1]["BPM"]) <= abs(Frequency - SongDict[NewSong]["BPM"])*PushFactor:
                         NewSong += 1
                         print("+1")
                     CurrentSong = NewSong
