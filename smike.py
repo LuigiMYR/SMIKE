@@ -138,19 +138,14 @@ try:
             if time.time() - LastSongStart > MinSongTime:
                 
                 if CurrentDelta > 0:
-                    NewSong = CurrentSong
-                    print("hh")
-                    while NewSong < len(SongDict) and abs(Frequency - SongDict[NewSong+1]["BPM"]) <= abs(Frequency - SongDict[NewSong]["BPM"])*PushFactor:
-                        NewSong += 1
-                        print("+1")
-                    CurrentSong = NewSong
+                    while CurrentSong < len(SongDict) and abs(Frequency - SongDict[CurrentSong+1]["BPM"]) <= abs(Frequency - SongDict[CurrentSong]["BPM"])*PushFactor:
+                        CurrentSong += 1
                     UpdateSong(CurrentSong)
     
                 elif CurrentDelta < 0 and CurrentSong != 1:
-                    NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
-                    if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                    while CurrentSong > 1 and abs(Frequency - SongDict[CurrentSong-1]["BPM"])*PushFactor <= abs(Frequency - SongDict[CurrentSong]["BPM"]):
                         CurrentSong -= 1
-                        UpdateSong(CurrentSong)
+                    UpdateSong(CurrentSong)
             else:
                 pass
                 #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
