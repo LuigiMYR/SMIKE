@@ -131,8 +131,9 @@ try:
                     Song = (SongDict[CurrentSong]["Title"]+'.mp3')
                     player.quit()
                     player = OMXPlayer('/home/pi/Music/' + Song)
+                    player.set_position(45)
                     player.play()
-                    player.set_position(30)
+                    
             
                 CurrentVolume = min(Volume, CurrentVolume + 100*BlendSpeed)
                 
