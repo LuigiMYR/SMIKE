@@ -49,7 +49,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 GPIO.setup(ReedBeatPin, GPIO.IN, GPIO.PUD_DOWN)
-GPIO.setup(ReedBreakPin, GPIO.IN, GPIO.PUD_DOWN)
+GPIO.setup(ReedBrakePin, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(LEDPin, GPIO.OUT)
 
 GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
