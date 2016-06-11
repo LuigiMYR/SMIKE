@@ -14,7 +14,7 @@ GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 SongDict = collections.OrderedDict()
 
 
-def UpdateFrequency():
+def UpdateFrequency(channel):
     
     if time.time() - Time > Bias:
         ##Frequency Check
