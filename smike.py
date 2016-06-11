@@ -15,7 +15,8 @@ SongDict = collections.OrderedDict()
 
 def UpdateSong(SongId):
     Song = (SongDict[SongId]["Title"]+'.mp3')
-    global player = OMXPlayer('/home/pi/Music/' + Song)
+    global player
+    player = OMXPlayer('/home/pi/Music/' + Song)
     
 
 def QuitPlay():
