@@ -133,7 +133,7 @@ try:
         else:
             CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
             
-            MinSongTime = MinSongTimeRatio * (Tolerance/abs(CurrentDelta))**2
+            MinSongTime = MinSongTimeRatio * (Tolerance/abs(CurrentDelta))**0.1
             
             if time.time() - LastSongStart > MinSongTime:
                 
