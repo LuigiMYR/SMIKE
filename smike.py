@@ -3,9 +3,6 @@
 
 import time, collections, RPi.GPIO as GPIO
 from omxplayer import OMXPlayer
-from sense_hat import SenseHat
-
-sense = SenseHat()
 
 
 
@@ -34,15 +31,15 @@ def UpdateSong(SongId):
     Fading = True
     
 def OnBrakeRising(channel):
-    sense.clear((255, 0,0))
+    GPIO.output(LEDPin,GPIO.HIGH)
 def OnBrakeFalling(channel):
-    sense.clear((0, 0,0))    
+    GPIO.output(LEDPin,GPIO.LOW)    
 
 
 
 ReedBeatPin = 4
 ReedBreakPin = 17
-LEDPin = 27
+LEDPin = 18
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -50,7 +47,7 @@ GPIO.setwarnings(False)
 GPIO.setup(ReedBeatPin, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(ReedBreakPin, GPIO.IN, GPIO.PUD_DOWN)
 GPIO.setup(LEDPin, GPIO.OUT)
-#fürs anmachen GPIO.output(LEDPin, GPIO.HIGH)  für ausmachen GPIO.output(LEDPin, GPIO.LOW)
+
 GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
 GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBreakRising)
 GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBreakFalling)
