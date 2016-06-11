@@ -9,7 +9,7 @@ GPIO.setwarnings(False)
 
 GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
-
+GPIO.add_event_detect(ReedPin, GPIO.RISING, callback=savetime)
 
 SongDict = collections.OrderedDict()
 
