@@ -49,8 +49,9 @@ ActualFrequency = 1
 
 
 ##User Data
-Tolerance = 5
+Tolerance = 10
 MinSongTime = 10
+MinSongTimeRatio = 15
 PushFactor = 1.05
 Bias = 0.2
 
@@ -99,22 +100,27 @@ try:
             ##Song Update
             if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
                 pass
-            elif time.time() - LastSongStart > MinSongTime:
-                CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
-                if CurrentDelta > 0 and CurrentSong < len(SongDict):
-                    NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
-                    if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
-                        CurrentSong += 1
-                        print("CRASHPOINT")
-                        UpdateSong(CurrentSong)
-    
-                elif CurrentDelta < 0 and CurrentSong != 1:
-                    NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
-                    if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
-                        CurrentSong -= 1
-                        UpdateSong(CurrentSong)
             else:
-                print("w8 m8 1337: ",time.time() - LastSongStart)
+                CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
+                
+                MinSongTime = MinSongTimeRatio * (CurrentDelta/Tolerance)
+                
+                if time.time() - LastSongStart > MinSongTime:
+                    
+                    if CurrentDelta > 0 and CurrentSong < len(SongDict):
+                        NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
+                        if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
+                            CurrentSong += 1
+                            print("CRASHPOINT")
+                            UpdateSong(CurrentSong)
+        
+                    elif CurrentDelta < 0 and CurrentSong != 1:
+                        NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
+                        if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                            CurrentSong -= 1
+                            UpdateSong(CurrentSong)
+                else:
+                    print("w8 m8 1337: ",time.time() - LastSongStart)
         
        
 except KeyboardInterrupt:
