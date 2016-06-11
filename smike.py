@@ -41,6 +41,7 @@ def QuitPlay():
     player.quit()
 
 
+
 GPIO.add_event_detect(ReedPin, GPIO.RISING, callback=UpdateFrequency)
 
 ##Frequency
@@ -137,11 +138,12 @@ try:
             
             if time.time() - LastSongStart > MinSongTime:
                 
-                if CurrentDelta > 0 and CurrentSong < len(SongDict):
-                    NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
-                    if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
-                        CurrentSong += 1
-                        UpdateSong(CurrentSong)
+                if CurrentDelta > 0:
+                    NewSong = CurrentSong
+                    while NewSong < len(SongDict) and abs(Frequency - SongDict[NewSong+1]["BPM"]) <= abs(NewSong)*PushFactor:
+                        NewSong += 1
+                    CurrentSong = NewSong
+                    UpdateSong(CurrentSong)
     
                 elif CurrentDelta < 0 and CurrentSong != 1:
                     NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
