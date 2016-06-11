@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import time, collections, RPi.GPIO as GPIO
+
+
+import time, collections, RPi.GPIO as GPIO, os
 from omxplayer import OMXPlayer
 
+if os.path
 
 ReedBeatPin = 4
 ReedBrakePin = 17
@@ -72,8 +75,7 @@ MinSongTimeRatio = 30
 PushFactor = 1.05
 Bias = 0.2
 BlendSpeed = 3
-CurrentVolume = 0
-Volume = -1500
+Volume = CurrentVolume = -2000
 
 ##Song Data
 CurrentSong = 1
