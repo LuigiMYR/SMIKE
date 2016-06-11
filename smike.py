@@ -3,14 +3,11 @@
 
 import time, collections, RPi.GPIO as GPIO
 from omxplayer import OMXPlayer
+from sense_hat import SenseHat
+
+sense = SenseHat()
 
 
-ReedPin = 4 # INSERT NIPPLE HERE
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setwarnings(False)
-
-GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
 
 
@@ -33,21 +30,28 @@ def UpdateFrequency(channel):
        
 
 def UpdateSong(SongId):
-    #global player, LastSongStart
-    #Song = (SongDict[SongId]["Title"]+'.mp3')
-    #player.quit()
-    #player = OMXPlayer('/home/pi/Music/' + Song)
-    #player.play()
-    #LastSongStart = time.time()
     global Fading
     Fading = True
     
-def QuitPlay():
-    player.quit()
+def OnBrakeRising(channel):
+    sense.clear((255, 0,0))
+def OnBrakeFalling(channel):
+    sense.clear((0, 0,0))    
 
 
 
-GPIO.add_event_detect(ReedPin, GPIO.RISING, callback=UpdateFrequency)
+ReedBeatPin = 4
+ReedBreakPin = 17
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO.setup(ReedBeatPin, GPIO.IN, GPIO.PUD_DOWN)
+GPIO.setup(ReedBreakPin, GPIO.IN, GPIO.PUD_DOWN)
+
+GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
+GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBreakRising)
+GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBreakFalling)
 
 ##Frequency
 PeriodTime = 0
@@ -59,7 +63,7 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 10
 MinSongTime = 10
-MinSongTimeRatio = 20
+MinSongTimeRatio = 30
 PushFactor = 1.05
 Bias = 0.2
 BlendSpeed = 3
