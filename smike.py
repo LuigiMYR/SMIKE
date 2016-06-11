@@ -15,7 +15,7 @@ SongDict = collections.OrderedDict()
 
 def UpdateSong(SongId):
     Song = (SongDict[SongId]["Title"]+'.mp3')
-    player = OMXPlayer('/home/pi/Music/' + Song)
+    global player = OMXPlayer('/home/pi/Music/' + Song)
     
 
 def QuitPlay():
@@ -57,7 +57,7 @@ for row in reader:
 print(SongDict)
 
 Song = (SongDict[1]["Title"]+'.mp3')
-global player = OMXPlayer('/home/pi/Music/' + Song)
+player = OMXPlayer('/home/pi/Music/' + Song)
 
 UpdateSong(1)
 
