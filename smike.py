@@ -49,11 +49,13 @@ ActualFrequency = 1
 
 ##User Data
 Tolerance = 5
+MinSongTime = 10
 PushFactor = 1.05
 Bias = 0.2
 
 ##Song Data
 CurrentSong = 1
+LastSongStart = Time
 
 ##SongDict Import
 import csv
@@ -96,7 +98,7 @@ try:
             ##Song Update
             if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
                 pass
-            else:
+            elif time.time() - LastSongStart > MinSongTime:
                 CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
                 if CurrentDelta > 0 and CurrentSong < len(SongDict):
                     NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
@@ -110,7 +112,8 @@ try:
                     if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
                         CurrentSong -= 1
                         UpdateSong(CurrentSong)
-        
+            else:
+                print("w8 m8 1337")
         
        
 except KeyboardInterrupt:
