@@ -105,7 +105,6 @@ try:
         ##print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
         ##Song Update
         if Fading:
-            print(CurrentVolume)
             LastSongStart = time.time()
             if not SongUpdated:
                 CurrentVolume = max(-3333, CurrentVolume - 100*BlendSpeed)
