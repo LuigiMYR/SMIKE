@@ -1,3 +1,6 @@
+#!/bin/usr/python
+# -*- coding: utf-8 -*-
+
 import time, collections, RPi.GPIO as GPIO
 from omxplayer import OMXPlayer
 
