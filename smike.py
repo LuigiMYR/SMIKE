@@ -1,4 +1,4 @@
-#!/bin/usr/python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 
 import time, collections, RPi.GPIO as GPIO
