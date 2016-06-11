@@ -88,7 +88,7 @@ for row in reader:
 Song = (SongDict[1]["Title"]+'.mp3')
 player = OMXPlayer('/home/pi/Music/' + Song)
 try:
-    UpdateSong(1)
+    #UpdateSong(1)
     
     player.play()
     
