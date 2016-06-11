@@ -69,21 +69,21 @@ while True:
     ##Frequqncy Interpolation
     Frequency += (ActualFrequency-Frequency)*0.1
     
-    print(Frequency)
-    print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
+    #print(Frequency)
+    #print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
 
     ## Reed Sensor Check
     
     
     if GPIO.input(ReedPin) and time.time() - Time > Bias:
-        print("CONTACT-----------------------------------------------------------")
+        
 
         ##Frequency Check
         Tmp = time.time()
         PeriodTime = Tmp - Time
         Time = Tmp
         ActualFrequency = 1/PeriodTime*60*2
-
+        print("CONTACT-----------------------------------------------------------", PeriodTime)
         ##Song Update
         if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
             pass
