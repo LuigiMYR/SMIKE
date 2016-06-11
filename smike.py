@@ -63,7 +63,7 @@ while True:
     
     
     if io.input(ReedPin):
-        print("CONTACT")
+        print("CONTACT-----------------------------------------------------------")
 
         ##Frequency Check
         Tmp = time.time()
