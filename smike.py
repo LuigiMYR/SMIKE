@@ -18,6 +18,7 @@ def UpdateFrequency(channel):
     
     if time.time() - Time > Bias:
         ##Frequency Check
+        print("CONTACT")
         Tmp = time.time()
         PeriodTime = Tmp - Time
         Time = Tmp
@@ -81,7 +82,7 @@ try:
     player.play()
     
     ##Tick
-    while True:
+    while abs(Frequency-ActualFrequency) > Tolerance:
         ##Frequqncy Interpolation
         Frequency += (ActualFrequency-Frequency)*0.1
         Frequency = min(Frequency, 400)
