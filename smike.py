@@ -1,29 +1,93 @@
-s = float(input("Tritte 1? "))
-t = float(input("Zeit 1? "))
-f = int(s / t * 60)
+import time, collections, RPi.GPIO as io
+from omxplayer import OMXPlayer
 
-s2 = float(input("Tritte 2? "))
-t2 = float(input("Zeit 2? "))
-f2 = int(s2 / t2 * 60)
+io.setmode(io.BCM)
 
-s3 = float(input("Tritte 3? "))
-t3 = float(input("Zeit 3? "))
-f3 = int(s3 / t3 * 60)
+ReedPin = 1 # INSERT NIPPLE HERE
+
+io.setup(ReedPin, io.IN, pull_up_down.PUD_UP)
+
+SongDict = collections.OrderedDict()
+
+def UpdateSong(SongId):
+    Song = (SongDict[SongId]["Title"]+'.mp3')
+    player = OMXPlayer('/home/pi/Music/' + Song)
+    player.play()
+
+def QuitPlay():
+    player.quit()
 
 
-for i in range(f-10, f+10):
-    if f2 == i:
-        print("Treffer 1 und 2")
-        for i in range(f-10, f+10):
-            if f3 == i:
-                print("Treffer 1 und 3")
-                break
-            elif i == f + 10:
-                print("Kein Treffer zwischen 1 und 3")
-                break
-    elif i == f + 9:
-        print("Kein Treffer zwischen 1 und 2")
-        break
+##Frequency
+PeriodTime = 0
+Time = time.time()
+Frequency = 1
+ActualFrequency = 1
+
+
+##User Data
+Tolerance = 5
+PushFactor = 1.05
+
+##Song Data
+CurrentSong = 1
+
+##SongDict Import
+import csv
+reader = csv.reader(open('Playlist.csv', 'r'))
+Header = []
+is_Header = True
+for row in reader:
+    if is_Header:
+        Header = row
+        is_Header = False
+    else:
+        SongDict[int(row[0])] = {}
+        for index in range(1, len(Header)):
+            
+            if Header[index] == "BPM":
+                SongDict[int(row[0])][Header[index]] = int(row[index])
+            else:
+                SongDict[int(row[0])][Header[index]] = row[index]
+print(SongDict)
+
+##Tick
+while True:
+    ##Frequqncy Interpolation
+    Frequency += (ActualFrequency-Frequency)*0.1
+    
+    print(Frequency)
+    print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
+
+    ## Reed Sensor Check
+    
+    
+    if io.input(ReedPin):
+        print("CONTACT")
+
+        ##Frequency Check
+        Tmp = time.time()
+        PeriodTime = Tmp - Time
+        Time = Tmp
+        ActualFrequency = 1/PeriodTime*60
+
+        ##Song Update
+        if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
+            pass
+        else:
+            CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
+            if CurrentDelta > 0 and CurrentSong != len(SongDict):
+                NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
+                if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
+                    CurrentSong += 1
+                    UpdateSong(CurrentSong)
+
+            elif CurrentDelta < 0 and CurrentSong != 1:
+                NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
+                if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                    CurrentSong -= 1
+                    UpdateSong(CurrentSong)
+
+    
         
-
         
