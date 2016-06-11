@@ -98,7 +98,7 @@ try:
             else:
                 CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
                 
-                MinSongTime = MinSongTimeRatio * (Tolerance/CurrentDelta)**2
+                MinSongTime = MinSongTimeRatio * (Tolerance/abs(CurrentDelta))**2
                 
                 if time.time() - LastSongStart > MinSongTime:
                     
@@ -106,7 +106,6 @@ try:
                         NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
                         if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
                             CurrentSong += 1
-                            print("CRASHPOINT")
                             UpdateSong(CurrentSong)
         
                     elif CurrentDelta < 0 and CurrentSong != 1:
@@ -115,7 +114,7 @@ try:
                             CurrentSong -= 1
                             UpdateSong(CurrentSong)
                 else:
-                    print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime)
+                    print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
         
        
 except KeyboardInterrupt:
