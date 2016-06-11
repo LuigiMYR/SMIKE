@@ -76,7 +76,6 @@ for row in reader:
                 SongDict[int(row[0])][Header[index]] = int(row[index])
             else:
                 SongDict[int(row[0])][Header[index]] = row[index]
-print(SongDict)
 
 
 Song = (SongDict[1]["Title"]+'.mp3')
@@ -93,10 +92,6 @@ try:
         
             Frequency += (ActualFrequency-Frequency)*0.1
             Frequency = min(Frequency, 400)
-            print(int(Frequency))
-            
-            #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
-            print(int(Frequency), PeriodTime)
             ##Song Update
             if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
                 pass
