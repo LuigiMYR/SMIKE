@@ -3,7 +3,7 @@ from omxplayer import OMXPlayer
 
 io.setmode(io.BCM)
 
-ReedPin = 1 # INSERT NIPPLE HERE
+ReedPin = 4 # INSERT NIPPLE HERE
 
 io.setup(ReedPin, io.IN, pull_up_down.PUD_UP)
 
