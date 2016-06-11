@@ -83,31 +83,33 @@ try:
     player.play()
     
     ##Tick
-    while abs(Frequency-ActualFrequency) > Tolerance:
+    while True:
         ##Frequqncy Interpolation
-        Frequency += (ActualFrequency-Frequency)*0.1
-        Frequency = min(Frequency, 400)
-        print(Frequency)
+        if abs(Frequency-ActualFrequency) > Tolerance:
         
-        #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
-        print(int(Frequency), PeriodTime)
-        ##Song Update
-        if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
-            pass
-        else:
-            CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
-            if CurrentDelta > 0 and CurrentSong < len(SongDict):
-                NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
-                if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
-                    CurrentSong += 1
-                    print("CRASHPOINT")
-                    UpdateSong(CurrentSong)
-
-            elif CurrentDelta < 0 and CurrentSong != 1:
-                NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
-                if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
-                    CurrentSong -= 1
-                    UpdateSong(CurrentSong)
+            Frequency += (ActualFrequency-Frequency)*0.1
+            Frequency = min(Frequency, 400)
+            print(Frequency)
+            
+            #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
+            print(int(Frequency), PeriodTime)
+            ##Song Update
+            if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
+                pass
+            else:
+                CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
+                if CurrentDelta > 0 and CurrentSong < len(SongDict):
+                    NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
+                    if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
+                        CurrentSong += 1
+                        print("CRASHPOINT")
+                        UpdateSong(CurrentSong)
+    
+                elif CurrentDelta < 0 and CurrentSong != 1:
+                    NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
+                    if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                        CurrentSong -= 1
+                        UpdateSong(CurrentSong)
         
         
        
