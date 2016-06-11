@@ -106,7 +106,7 @@ try:
        
         
         Frequency += (ActualFrequency-Frequency)*0.025
-        Frequency = min(Frequency, 400)
+        Frequency = min(Frequency, 4000)
         
         ##print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
         ##Song Update
