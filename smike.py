@@ -25,7 +25,7 @@ def UpdateFrequency(channel):
         Time = Tmp
         ActualFrequency = 1/PeriodTime*60*2
         global file
-        file.write(str(ActualFrequency))
+        file.write(str(ActualFrequency)+"; ")
         
        
 
