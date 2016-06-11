@@ -103,7 +103,7 @@ try:
             else:
                 CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
                 
-                MinSongTime = MinSongTimeRatio * (CurrentDelta/Tolerance)
+                MinSongTime = MinSongTimeRatio * (Tolerance/CurrentDelta)**2
                 
                 if time.time() - LastSongStart > MinSongTime:
                     
@@ -120,7 +120,7 @@ try:
                             CurrentSong -= 1
                             UpdateSong(CurrentSong)
                 else:
-                    print("w8 m8 1337: ",time.time() - LastSongStart)
+                    print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart))
         
        
 except KeyboardInterrupt:
