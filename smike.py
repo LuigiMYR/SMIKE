@@ -132,6 +132,7 @@ try:
                     player.quit()
                     player = OMXPlayer('/home/pi/Music/' + Song)
                     player.play()
+                    player.set_position(30)
             
                 CurrentVolume = min(Volume, CurrentVolume + 100*BlendSpeed)
                 
