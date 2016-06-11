@@ -89,35 +89,34 @@ try:
     while True:
         ##Frequqncy Interpolation
         print(Frequency)
-        if abs(Frequency-ActualFrequency) > Tolerance:
         
-            Frequency += (ActualFrequency-Frequency)*0.1
-            Frequency = min(Frequency, 400)
-            ##Song Update
-            if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
-                pass
+        Frequency += (ActualFrequency-Frequency)*0.1
+        Frequency = min(Frequency, 400)
+        ##Song Update
+        if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
+            pass
+        else:
+            CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
+            
+            MinSongTime = MinSongTimeRatio * (Tolerance/abs(CurrentDelta))**2
+            
+            if time.time() - LastSongStart > MinSongTime:
+                
+                if CurrentDelta > 0 and CurrentSong < len(SongDict):
+                    NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
+                    if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
+                        CurrentSong += 1
+                        UpdateSong(CurrentSong)
+    
+                elif CurrentDelta < 0 and CurrentSong != 1:
+                    NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
+                    if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
+                        CurrentSong -= 1
+                        UpdateSong(CurrentSong)
             else:
-                CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
-                
-                MinSongTime = MinSongTimeRatio * (Tolerance/abs(CurrentDelta))**2
-                
-                if time.time() - LastSongStart > MinSongTime:
-                    
-                    if CurrentDelta > 0 and CurrentSong < len(SongDict):
-                        NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
-                        if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
-                            CurrentSong += 1
-                            UpdateSong(CurrentSong)
-        
-                    elif CurrentDelta < 0 and CurrentSong != 1:
-                        NewDelta = Frequency - SongDict[CurrentSong-1]["BPM"]
-                        if abs(NewDelta)*PushFactor <= abs(CurrentDelta):
-                            CurrentSong -= 1
-                            UpdateSong(CurrentSong)
-                else:
-                    pass
-                    #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
-        
+                pass
+                #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
+    
        
 except KeyboardInterrupt:
     player.quit()
