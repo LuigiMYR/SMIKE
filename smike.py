@@ -168,5 +168,6 @@ try:
 except KeyboardInterrupt:
     player.quit()
     logfile.close()
+    GPIO.output(LEDPin,GPIO.LOW)
             
             
