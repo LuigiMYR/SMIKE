@@ -83,16 +83,17 @@ while True:
         PeriodTime = Tmp - Time
         Time = Tmp
         ActualFrequency = 1/PeriodTime*60*2
-        print("CONTACT-----------------------------------------------------------", PeriodTime)
+        print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
         ##Song Update
         if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
             pass
         else:
             CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
-            if CurrentDelta > 0 and CurrentSong != len(SongDict):
+            if CurrentDelta > 0 and CurrentSong < len(SongDict):
                 NewDelta = Frequency - SongDict[CurrentSong+1]["BPM"]
                 if abs(NewDelta) <= abs(CurrentDelta)*PushFactor:
                     CurrentSong += 1
+                    print("CRASHPOINT")
                     UpdateSong(CurrentSong)
 
             elif CurrentDelta < 0 and CurrentSong != 1:
