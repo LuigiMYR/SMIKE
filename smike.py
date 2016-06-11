@@ -24,6 +24,8 @@ def UpdateFrequency(channel):
         PeriodTime = Tmp - Time
         Time = Tmp
         ActualFrequency = 1/PeriodTime*60*2
+        global file
+        file.write(str(ActualFrequency))
         
        
 
@@ -88,6 +90,7 @@ for row in reader:
 
 Song = (SongDict[1]["Title"]+'.mp3')
 player = OMXPlayer('/home/pi/Music/' + Song)
+file = open("Log.txt", "w")
 try:
     #UpdateSong(1)
     
@@ -152,6 +155,6 @@ try:
        
 except KeyboardInterrupt:
     player.quit()
-        
+    file.close()
             
             
