@@ -81,7 +81,7 @@ while True:
         Tmp = time.time()
         PeriodTime = Tmp - Time
         Time = Tmp
-        ActualFrequency = 1/PeriodTime*60
+        ActualFrequency = 1/PeriodTime*60*2
 
         ##Song Update
         if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
