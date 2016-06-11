@@ -6,7 +6,7 @@ from omxplayer import OMXPlayer
 
 
 ReedBeatPin = 4
-ReedBreakPin = 17
+ReedBrakePin = 17
 LEDPin = 18
 
 
