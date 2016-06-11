@@ -5,7 +5,9 @@ import time, collections, RPi.GPIO as GPIO
 from omxplayer import OMXPlayer
 
 
-
+ReedBeatPin = 4
+ReedBreakPin = 17
+LEDPin = 18
 
 
 SongDict = collections.OrderedDict()
@@ -41,9 +43,7 @@ def OnBrakeFalling(channel):
 
 
 
-ReedBeatPin = 4
-ReedBreakPin = 17
-LEDPin = 18
+
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
