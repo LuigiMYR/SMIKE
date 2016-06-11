@@ -91,6 +91,7 @@ try:
     #UpdateSong(1)
     
     player.play()
+    player.set_volume(CurrentVolume)
     
     ##Tick
     while True:
@@ -103,7 +104,7 @@ try:
         print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.1)
         ##Song Update
         if Fading:
-            print("--------------------------------")
+            print(CurrentVolume)
             if not SongUpdated:
                 CurrentVolume = max(-3333, Volume - 100*BlendSpeed)
                 
