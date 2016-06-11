@@ -68,7 +68,7 @@ while True:
     ## Reed Sensor Check
     
     
-    if GPIO.input(ReedPin) && time.time() - Time > Bias:
+    if GPIO.input(ReedPin) and time.time() - Time > Bias:
         print("CONTACT-----------------------------------------------------------")
 
         ##Frequency Check
