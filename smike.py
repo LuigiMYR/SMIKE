@@ -11,6 +11,9 @@ GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
 SongDict = collections.OrderedDict()
 
+Song = (SongDict[1]["Title"]+'.mp3')
+player = OMXPlayer('/home/pi/Music/' + Song)
+
 def UpdateSong(SongId):
     Song = (SongDict[SongId]["Title"]+'.mp3')
     player = OMXPlayer('/home/pi/Music/' + Song)
