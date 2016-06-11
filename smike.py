@@ -115,6 +115,7 @@ try:
                             CurrentSong -= 1
                             UpdateSong(CurrentSong)
                 else:
+                    pass
                     #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
         
        
