@@ -5,7 +5,7 @@ io.setmode(io.BCM)
 
 ReedPin = 4 # INSERT NIPPLE HERE
 
-io.setup(ReedPin, io.IN, io.PUD_UP)
+io.setup(ReedPin, io.IN, io.PUD_DOWN)
 
 SongDict = collections.OrderedDict()
 
