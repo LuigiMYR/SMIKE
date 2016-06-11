@@ -1,11 +1,13 @@
-import time, collections, RPi.GPIO as io
+import time, collections, RPi.GPIO as GPIO
 from omxplayer import OMXPlayer
 
-io.setmode(io.BCM)
 
 ReedPin = 4 # INSERT NIPPLE HERE
 
-io.setup(ReedPin, io.IN, io.PUD_DOWN)
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
 SongDict = collections.OrderedDict()
 
@@ -62,7 +64,7 @@ while True:
     ## Reed Sensor Check
     
     
-    if io.input(ReedPin):
+    if GPIO.input(ReedPin):
         print("CONTACT-----------------------------------------------------------")
 
         ##Frequency Check
