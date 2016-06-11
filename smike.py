@@ -74,7 +74,7 @@ SongUpdated = False
 
 ##SongDict Import
 import csv
-reader = csv.reader(open('Playlist.csv', 'r'))
+reader = csv.reader(open('/home/pi/SMIKE/Playlist.csv', 'r'))
 Header = []
 is_Header = True
 for row in reader:
@@ -93,7 +93,7 @@ for row in reader:
 
 Song = (SongDict[1]["Title"]+'.mp3')
 player = OMXPlayer('/home/pi/Music/' + Song)
-file = open("Log.txt", "w")
+file = open("/home/pi/SMIKE/Log.txt", "w")
 try:
     #UpdateSong(1)
     
