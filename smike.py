@@ -3,10 +3,13 @@
 
 
 
-import time, collections, RPi.GPIO as GPIO, os
+import time, collections, RPi.GPIO as GPIO, os, sys
 from omxplayer import OMXPlayer
 
-if os.path
+if os.path.exists("/home/pi/SMIKE/Smike.pid"):
+    sys.exit(0)
+else:
+    open("/home/pi/SMIKE/Smike.pid", "w").close()
 
 ReedBeatPin = 4
 ReedBrakePin = 17
