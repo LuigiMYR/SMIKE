@@ -105,6 +105,7 @@ try:
         ##Song Update
         if Fading:
             print(CurrentVolume)
+            LastSongStart = time.time()
             if not SongUpdated:
                 CurrentVolume = max(-3333, CurrentVolume - 100*BlendSpeed)
                 
@@ -121,7 +122,7 @@ try:
                 
                 if CurrentVolume == Volume:
                     SongUpdated = Fading = False
-                    LastSongStart = time.time()
+                    
                     
             player.set_volume(CurrentVolume)
             
