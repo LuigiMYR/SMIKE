@@ -36,10 +36,12 @@ def OnBrakeRising(channel):
     GPIO.output(LEDPin,GPIO.HIGH)
     GPIO.remove_event_detect(ReedBrakePin)
     GPIO.add_event_detect(ReedBrakePin, GPIO.FALLING, callback=OnBrakeFalling)
+    print("On")
 def OnBrakeFalling(channel):
     GPIO.output(LEDPin,GPIO.LOW)
     GPIO.remove_event_detect(ReedBrakePin)
     GPIO.add_event_detect(ReedBrakePin, GPIO.RISING, callback=OnBrakeRising)
+    print("OFF")
 
 
 
