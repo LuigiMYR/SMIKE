@@ -33,7 +33,7 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 5
 PushFactor = 1.05
-Bias = 0.1
+Bias = 0.2
 
 ##Song Data
 CurrentSong = 1
@@ -68,7 +68,7 @@ player.play()
 while True:
     ##Frequqncy Interpolation
     Frequency += (ActualFrequency-Frequency)*0.1
-    
+    Frequency = min(Frequency, 200)
     #print(Frequency)
     #print(SongDict[CurrentSong]["Title"], SongDict[CurrentSong]["BPM"])
 
