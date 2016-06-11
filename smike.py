@@ -19,6 +19,7 @@ def UpdateFrequency(channel):
     if time.time() - Time > Bias:
         ##Frequency Check
         print("CONTACT")
+        global Time, ActualFrequency
         Tmp = time.time()
         PeriodTime = Tmp - Time
         Time = Tmp
