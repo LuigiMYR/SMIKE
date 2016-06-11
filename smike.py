@@ -114,7 +114,7 @@ try:
                         CurrentSong -= 1
                         UpdateSong(CurrentSong)
             else:
-                print("w8 m8 1337")
+                print("w8 m8 1337: ",time.time() - LastSongStart)
         
        
 except KeyboardInterrupt:
