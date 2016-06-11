@@ -150,7 +150,6 @@ try:
             else:
                 pass
                 #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
-    time.sleep(0.16667/2)
        
 except KeyboardInterrupt:
     player.quit()
