@@ -14,7 +14,7 @@ SongDict = collections.OrderedDict()
 def UpdateSong(SongId):
     Song = (SongDict[SongId]["Title"]+'.mp3')
     player = OMXPlayer('/home/pi/Music/' + Song)
-    player.play()
+    
 
 def QuitPlay():
     player.quit()
@@ -52,6 +52,9 @@ for row in reader:
             else:
                 SongDict[int(row[0])][Header[index]] = row[index]
 print(SongDict)
+
+UpdateSong(1)
+player.play()
 
 ##Tick
 while True:
