@@ -18,7 +18,7 @@ def UpdateFrequency(channel):
     
     if time.time() - Time > Bias:
         ##Frequency Check
-        global Time, ActualFrequency, SongDict
+        global Time, ActualFrequency, SongDict, CurrentSong
         
         Tmp = time.time()
         PeriodTime = Tmp - Time
