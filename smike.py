@@ -35,11 +35,11 @@ def UpdateSong(SongId):
 def OnBrakeRising(channel):
     GPIO.output(LEDPin,GPIO.HIGH)
     GPIO.remove_event_detect(ReedBrakePin)
-    GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBrakeFalling)
+    GPIO.add_event_detect(ReedBrakePin, GPIO.FALLING, callback=OnBrakeFalling)
 def OnBrakeFalling(channel):
     GPIO.output(LEDPin,GPIO.LOW)
     GPIO.remove_event_detect(ReedBrakePin)
-    GPIO.add_event_detect(ReedBreakPin, GPIO.RISING, callback=OnBrakeRising)
+    GPIO.add_event_detect(ReedBrakePin, GPIO.RISING, callback=OnBrakeRising)
 
 
 
@@ -54,7 +54,7 @@ GPIO.setup(LEDPin, GPIO.OUT)
 
 GPIO.add_event_detect(ReedBeatPin, GPIO.RISING, callback=UpdateFrequency)
 
-GPIO.add_event_detect(ReedBreakPin, GPIO.FALLING, callback=OnBrakeFalling)
+GPIO.add_event_detect(ReedBrakePin, GPIO.FALLING, callback=OnBrakeFalling)
 
 ##Frequency
 PeriodTime = 0
