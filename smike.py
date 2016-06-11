@@ -23,7 +23,7 @@ def UpdateFrequency(channel):
     global Time, ActualFrequency
     if time.time() - Time > Bias:
         ##Frequency Check
-        print("CONTACT")
+        #print("CONTACT")
         
         Tmp = time.time()
         PeriodTime = Tmp - Time
@@ -42,12 +42,12 @@ def OnBrakeRising(channel):
     GPIO.output(LEDPin,GPIO.LOW)
     GPIO.remove_event_detect(ReedBrakePin)
     GPIO.add_event_detect(ReedBrakePin, GPIO.FALLING, callback=OnBrakeFalling)
-    print("OFF")
+    #print("OFF")
 def OnBrakeFalling(channel):
     GPIO.output(LEDPin,GPIO.HIGH)
     GPIO.remove_event_detect(ReedBrakePin)
     GPIO.add_event_detect(ReedBrakePin, GPIO.RISING, callback=OnBrakeRising)
-    print("OFF")
+    #print("OFF")
 
 
 
@@ -121,7 +121,7 @@ try:
         
         Frequency += (ActualFrequency-Frequency)*0.025
         Frequency = min(Frequency, 4000)
-        print(Frequency)
+        #print(Frequency)
         ##print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
         ##Song Update
         if Fading:
