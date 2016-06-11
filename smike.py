@@ -28,13 +28,14 @@ def UpdateFrequency(channel):
        
 
 def UpdateSong(SongId):
-    global player, LastSongStart
-    Song = (SongDict[SongId]["Title"]+'.mp3')
-    player.quit()
-    player = OMXPlayer('/home/pi/Music/' + Song)
-    player.play()
-    LastSongStart = time.time()
-
+    #global player, LastSongStart
+    #Song = (SongDict[SongId]["Title"]+'.mp3')
+    #player.quit()
+    #player = OMXPlayer('/home/pi/Music/' + Song)
+    #player.play()
+    #LastSongStart = time.time()
+    Fading = True
+    
 def QuitPlay():
     player.quit()
 
@@ -51,13 +52,18 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 10
 MinSongTime = 10
-MinSongTimeRatio = 15
+MinSongTimeRatio = 20
 PushFactor = 1.05
 Bias = 0.2
+BlendingSpeed = 1
+CurrentVolume = 0
+Volume = -1000
 
 ##Song Data
 CurrentSong = 1
 LastSongStart = Time
+Fading = False
+SongUpdated = False
 
 ##SongDict Import
 import csv
@@ -95,7 +101,29 @@ try:
         
         print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.1)
         ##Song Update
-        if SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
+        if Fading:
+            if not SongUpdated:
+                CurrentVolume = max(-3333, Volume - 100*BlendSpeed)
+                
+                if CurrentVolume == -3333:
+                    SongUpdated = True
+            else:
+                Song = (SongDict[SongId]["Title"]+'.mp3')
+                player.quit()
+                player = OMXPlayer('/home/pi/Music/' + Song)
+                player.play()
+            
+                CurrentVolume = min(Volume, CurrentVolume + 100*BlendSpeed)
+                
+                if CurrentVolume == Volume:
+                    SongUpdated = Fading = False
+                    LastSongStart = time.time()
+                    
+            player.set_volume(CurrentVolume)
+            
+            
+            
+        elif SongDict[CurrentSong]["BPM"] - Tolerance < Frequency < SongDict[CurrentSong]["BPM"] + Tolerance:
             pass
         else:
             CurrentDelta = Frequency - SongDict[CurrentSong]["BPM"]
@@ -118,7 +146,7 @@ try:
             else:
                 pass
                 #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
-    
+    time.sleep(0.16667/2)
        
 except KeyboardInterrupt:
     player.quit()
