@@ -53,12 +53,12 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 10
 MinSongTime = 10
-MinSongTimeRatio = 20
+MinSongTimeRatio = 30
 PushFactor = 1.05
 Bias = 0.2
-BlendSpeed = 1
+BlendSpeed = 1.5
 CurrentVolume = 0
-Volume = -1000
+Volume = -1200
 
 ##Song Data
 CurrentSong = 1
@@ -101,7 +101,7 @@ try:
         Frequency += (ActualFrequency-Frequency)*0.025
         Frequency = min(Frequency, 400)
         
-        print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.1)
+        print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
         ##Song Update
         if Fading:
             print(CurrentVolume)
