@@ -106,7 +106,7 @@ try:
         if Fading:
             print(CurrentVolume)
             if not SongUpdated:
-                CurrentVolume = max(-3333, Volume - 100*BlendSpeed)
+                CurrentVolume = max(-3333, CurrentVolume - 100*BlendSpeed)
                 
                 if CurrentVolume == -3333:
                     SongUpdated = True
