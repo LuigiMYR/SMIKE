@@ -11,8 +11,7 @@ GPIO.setup(ReedPin, GPIO.IN, GPIO.PUD_DOWN)
 
 SongDict = collections.OrderedDict()
 
-Song = (SongDict[1]["Title"]+'.mp3')
-player = OMXPlayer('/home/pi/Music/' + Song)
+
 
 def UpdateSong(SongId):
     Song = (SongDict[SongId]["Title"]+'.mp3')
@@ -57,7 +56,11 @@ for row in reader:
                 SongDict[int(row[0])][Header[index]] = row[index]
 print(SongDict)
 
+Song = (SongDict[1]["Title"]+'.mp3')
+player = OMXPlayer('/home/pi/Music/' + Song)
+
 UpdateSong(1)
+
 player.play()
 
 ##Tick
