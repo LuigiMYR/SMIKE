@@ -88,6 +88,7 @@ try:
     ##Tick
     while True:
         ##Frequqncy Interpolation
+        print(Frequency)
         if abs(Frequency-ActualFrequency) > Tolerance:
         
             Frequency += (ActualFrequency-Frequency)*0.1
@@ -114,7 +115,7 @@ try:
                             CurrentSong -= 1
                             UpdateSong(CurrentSong)
                 else:
-                    print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
+                    #print("w8 m8 1337: ", MinSongTime - (time.time() - LastSongStart), MinSongTime, CurrentDelta)
         
        
 except KeyboardInterrupt:
