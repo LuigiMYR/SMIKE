@@ -87,7 +87,7 @@ try:
         ##Frequqncy Interpolation
         Frequency += (ActualFrequency-Frequency)*0.1
         Frequency = min(Frequency, 400)
-        
+        print(Frequency)
         
         #print("CONTACT-----------------------------------------------------------", PeriodTime, Frequency, ActualFrequency)
         print(int(Frequency), PeriodTime)
