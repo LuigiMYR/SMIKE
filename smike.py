@@ -111,7 +111,7 @@ try:
                 if CurrentVolume == -3333:
                     SongUpdated = True
             else:
-                Song = (SongDict[SongId]["Title"]+'.mp3')
+                Song = (SongDict[CurrentSong]["Title"]+'.mp3')
                 player.quit()
                 player = OMXPlayer('/home/pi/Music/' + Song)
                 player.play()
