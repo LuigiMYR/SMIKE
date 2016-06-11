@@ -102,7 +102,7 @@ try:
         Frequency += (ActualFrequency-Frequency)*0.025
         Frequency = min(Frequency, 400)
         
-        print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
+        ##print(int(Frequency), MinSongTimeRatio * (Tolerance/abs(Frequency - SongDict[CurrentSong]["BPM"]))**0.066)
         ##Song Update
         if Fading:
             print(CurrentVolume)
@@ -140,8 +140,10 @@ try:
                 
                 if CurrentDelta > 0:
                     NewSong = CurrentSong
+                    print("hh")
                     while NewSong < len(SongDict) and abs(Frequency - SongDict[NewSong+1]["BPM"]) <= abs(NewSong)*PushFactor:
                         NewSong += 1
+                        print("+1")
                     CurrentSong = NewSong
                     UpdateSong(CurrentSong)
     
