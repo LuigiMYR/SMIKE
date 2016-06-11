@@ -30,6 +30,7 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 5
 PushFactor = 1.05
+Bias = 0.1
 
 ##Song Data
 CurrentSong = 1
@@ -67,7 +68,7 @@ while True:
     ## Reed Sensor Check
     
     
-    if GPIO.input(ReedPin):
+    if GPIO.input(ReedPin) && time.time() - Time > Bias:
         print("CONTACT-----------------------------------------------------------")
 
         ##Frequency Check
