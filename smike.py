@@ -74,7 +74,7 @@ ActualFrequency = 1
 ##User Data
 Tolerance = 10
 MinSongTime = 10
-MinSongTimeRatio = 30
+MinSongTimeRatio = 20
 PushFactor = 1.05
 Bias = 0.2
 BlendSpeed = 3
