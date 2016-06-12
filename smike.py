@@ -77,7 +77,7 @@ MinSongTime = 10
 MinSongTimeRatio = 20
 PushFactor = 1.05
 Bias = 0.2
-BlendSpeed = 3
+BlendSpeed = 5
 Volume = CurrentVolume = -1100
 
 ##Song Data
