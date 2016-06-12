@@ -146,6 +146,7 @@ try:
                     
                     
             player.set_volume(CurrentVolume)
+            print(CurrentVolume, CurrentSong)
             
             
             
